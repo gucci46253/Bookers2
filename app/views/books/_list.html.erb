@@ -1,0 +1,47 @@
+<% if flash[:notice] %>
+          <p id="notice">
+           <%= flash[:notice] %>
+          </p>
+          <% end %>
+
+        <h2>User info</h2>
+        <%= image_tag user.get_profile_image(100,100) %>
+
+              <th scope="col">name</th>
+              <th scope="col"><%= user.name %></th>
+            </tr>
+            <tr>
+              <th scope="col">introduction</th>
+              <th scope="col"><%= user.introduction %></th>
+            </tr>
+          </tbody>
+          </table>
+          <div class="row">
+        <%= link_to edit_user_path(user.id), class: "nav-link btn btn-outline-primary  btn-block text-secondary text-center border border-dark rounded" do %>
+              <i class="fas fa-user-cog"></i>
+            <% end %>
+          </div>
+
+          <h1>New book</h1>
+
+          <% if book.errors.any? %>
+          <%= book.errors.count %>件のerrorが発生しました
+          <ul>
+          <% book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+          <% end %>
+          <%= form_with model: book do |f| %>
+          <h4>Title</h4>
+          <div class="form-group">
+           <%= f.text_field :title %>
+          </div>
+          <h4>Opinion</h4>
+          <%= f.text_area :body %>
+           <div class="row">
+            <%= f.submit('Create Book',class: 'btn btn-success') %>
+           </div>
+          <% end %>
+
+
